@@ -1,0 +1,190 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<style>
+
+/* Page Entry Animation */
+.reports-wrapper {
+    animation: zoomFade 0.9s ease-out;
+}
+
+/* Animated Heading */
+.report-title {
+    font-size: 35px;
+    font-weight: 800;
+    text-align: center;
+    color: #00eaff;
+    text-shadow: 0 0 12px #00eaff, 0 0 25px #0077ff;
+    animation: glowPulse 3s infinite alternate;
+}
+
+/* Floating Particles Background */
+.particle-bg {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:-1;
+}
+
+.particle {
+    position:absolute;
+    width:8px; height:8px;
+    background:#00eaff;
+    border-radius:50%;
+    opacity:0.4;
+    animation: floatUp 10s linear infinite;
+}
+
+/* Glass Card */
+.report-card {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(0,255,255,0.2);
+    animation: cardSlide 1s ease-out;
+    box-shadow: 0 0 20px rgba(0,255,255,0.15);
+}
+
+/* Table styles */
+.table-hover tbody tr {
+    transition: transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.table-hover tbody tr:hover {
+    transform: scale(1.03);
+    background: rgba(0, 255, 255, 0.18) !important;
+    box-shadow: 0 0 15px rgba(0,255,255,0.35);
+}
+
+/* Shimmer Loading Animation */
+.shimmer {
+    background: linear-gradient(90deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.05) 100%);
+    background-size: 200% 100%;
+    animation: shimmerLoad 1.6s infinite;
+}
+
+/* Row-by-row appear animation */
+.table-body-row {
+    animation: rowFloat 0.6s ease forwards;
+    opacity:0;
+}
+
+/* KEYFRAMES */
+@keyframes glowPulse {
+    0% { text-shadow: 0 0 10px #00eaff; }
+    100% { text-shadow: 0 0 25px #00eaff, 0 0 40px #0077ff; }
+}
+
+@keyframes zoomFade {
+    from { opacity:0; transform:scale(0.9) translateY(20px); }
+    to { opacity:1; transform:scale(1) translateY(0); }
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.5); }
+    100% { transform: translateY(-10vh) scale(1.2); }
+}
+
+@keyframes shimmerLoad {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+@keyframes rowFloat {
+    0% { opacity:0; transform:translateY(15px); }
+    100% { opacity:1; transform:translateY(0); }
+}
+
+@keyframes cardSlide {
+    from { opacity:0; transform:translateY(30px); }
+    to { opacity:1; transform:translateY(0); }
+}
+</style>
+
+<!-- Floating Particles -->
+<div class="particle-bg" id="particle-container"></div>
+
+<script>
+// Generate particles dynamically to avoid template linting issues
+const particleContainer = document.getElementById('particle-container');
+for (let i = 0; i < 20; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = (i * 4) + '%';
+    particle.style.animationDelay = (i * 0.25) + 's';
+    particle.style.width = (6 + (i % 3)) + 'px';
+    particle.style.height = (6 + (i % 3)) + 'px';
+    particleContainer.appendChild(particle);
+}
+</script>
+
+<div class="container mt-5 reports-wrapper">
+
+    <h2 class="report-title mb-5">
+        📑 Prediction Report History
+    </h2>
+
+    <div class="report-card">
+
+        <table class="table table-hover text-white" id="pred_table">
+            <thead>
+                <tr style="color:#00eaff; font-weight:bold; font-size:15px;">
+                    <th>DATE</th>
+                    <th>JOB TITLE</th>
+                    <th>SECTOR</th>
+                    <th>LOCATION</th>
+                    <th>RATING</th>
+                    <th>PREDICTION</th>
+                    <th>RANGE</th>
+                    <th>CONFIDENCE</th>
+                    <th>RECOMMENDATIONS</th>
+                </tr>
+            </thead>
+            <tbody id="pred_table_body">
+                <tr class="shimmer"><td colspan="9" class="py-4"></td></tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+async function loadHistory() {
+    try {
+        const res = await fetch("/api/prediction_history?limit=5000");
+        const data = await res.json();
+
+        let rows = "";
+        let delay = 0;
+
+        data.predictions.forEach(r => {
+            rows += `
+            <tr class="table-body-row" style="animation-delay:${delay}s;">
+                <td>${r.ts}</td>
+                <td>${r.job_title}</td>
+                <td>${r.sector}</td>
+                <td>${r.location}</td>
+                <td>${r.rating}</td>
+                <td>₹${r.predicted_salary.toLocaleString()}</td>
+                <td>₹${r.min_salary.toLocaleString()} - ₹${r.max_salary.toLocaleString()}</td>
+                <td>${r.confidence}%</td>
+                <td>${(r.recommendations || []).join(", ")}</td>
+            </tr>`;
+            delay += 0.05; /* stagger by 50ms */
+        });
+
+        document.getElementById("pred_table_body").innerHTML = rows;
+
+    } catch (err) {
+        console.error("❌ Failed loading predictions:", err);
+    }
+}
+
+loadHistory();
+</script>
+
+{% endblock %}

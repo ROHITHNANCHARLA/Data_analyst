@@ -1,0 +1,192 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<style>
+.hero-section {
+  height: 100vh;
+  background: url("{{ url_for('static', filename='img/dataanalyst1.jpg') }}") no-repeat center center / cover;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+
+
+
+  <!-- 🌐 Fullscreen Hero Section -->
+<section class="hero-section text-center text-dark">
+
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Floating Icons -->
+  <div class="floating-icons">
+    <i class="fas fa-chart-line"></i>
+    <i class="fas fa-database"></i>
+    <i class="fas fa-brain"></i>
+    <i class="fas fa-chart-pie"></i>
+    <i class="fas fa-code"></i>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="container text-center hero-content fade-up">
+    <h1 class="display-4 fw-bold mb-3 text-light animate__animated animate__fadeInDown">
+      📊 Data Analyst Job Insights Portal
+    </h1>
+    <p class="lead mb-4 text-light animate__animated animate__fadeInUp">
+      Discover trends, explore job analytics, and predict salary insights powered by <b>Artificial Intelligence</b>.  
+      <br>Analyze. Visualize. Predict. — all in one intelligent platform.
+    </p>
+
+    <div class="mt-4">
+      <a href="/dashboard" class="btn btn-primary btn-lg shadow-sm me-3 hover-glow">Go to Dashboard</a>
+      <a href="/analytics" class="btn btn-outline-light btn-lg shadow-sm hover-glow">Explore Analytics</a>
+    </div>
+  </div>
+
+  <div class="scroll-indicator text-light">
+    <i class="fas fa-angle-double-down fa-2x"></i>
+  </div>
+</section>
+
+
+<!-- 🌟 Highlights Section -->
+<section class="py-5 text-center text-dark" style="background:#f8f9fb;">
+  <div class="container fade-in">
+    <h2 class="fw-bold text-primary mb-4">🌟 Project Highlights</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <h4 class="text-primary">📈 Real-Time Job Analytics</h4>
+          <p>Visualize demand, salaries, and performance of data roles across industries with stunning charts and maps.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <h4 class="text-primary">🤖 ML-Driven Predictions</h4>
+          <p>Predict salary ranges and skill impact using machine learning and Random Forest regression models.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-0 shadow-sm p-4 h-100">
+          <h4 class="text-primary">🧭 Career Path Insights</h4>
+          <p>Uncover the most in-demand tools and technologies used by top companies hiring Data Analysts.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 💼 Career Roles Section -->
+<section class="py-5 text-light" style="background: linear-gradient(135deg, #004e92, #000428);">
+  <div class="container fade-up">
+    <h2 class="fw-bold mb-4">🎯 Career Roles You Can Explore</h2>
+    <div class="row text-start">
+      <div class="col-md-6 col-lg-3 mb-3">
+        <div class="card bg-transparent border-0 text-white">
+          <h5>📊 Data Analyst</h5>
+          <p>Interpret large datasets, identify trends, and deliver actionable insights for decision-making.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-3">
+        <div class="card bg-transparent border-0 text-white">
+          <h5>📈 Business Intelligence Analyst</h5>
+          <p>Design dashboards in Power BI or Tableau and translate raw data into business growth strategies.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-3">
+        <div class="card bg-transparent border-0 text-white">
+          <h5>🤖 ML Analyst</h5>
+          <p>Use predictive analytics to forecast salaries, skill demand, and job trends with ML models.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 mb-3">
+        <div class="card bg-transparent border-0 text-white">
+          <h5>💼 Financial Data Analyst</h5>
+          <p>Analyze investment trends and optimize business strategies with statistical insights.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 🧠 About Section -->
+<section class="py-5 text-center text-dark" style="background:#fff;">
+  <div class="container fade-in">
+    <h2 class="fw-bold mb-3 text-primary">📚 About the Project</h2>
+    <p class="mb-4" style="max-width:800px; margin:auto;">
+      <strong>Data Analyst Job Insights</strong> is a data-driven analytics project that extracts and analyzes thousands of job listings.  
+      Built using <strong>Python, Flask, Pandas, Scikit-Learn, and Plotly</strong>, it provides real-time insights and salary predictions to bridge the gap between data and opportunity.
+    </p>
+  </div>
+</section>
+
+<!-- ⚙️ Team & Tools Section -->
+<section class="py-5 text-light" style="background:linear-gradient(120deg,#0a1931,#185adb,#00b4d8);">
+  <div class="container text-center fade-in">
+    <h2 class="fw-bold mb-4">👩‍💻 Development Team & Tech Stack</h2>
+    <p class="mb-5">Built with cutting-edge tools for modern data visualization and analytics.</p>
+
+    <div class="row justify-content-center">
+      <div class="col-md-2 mb-4"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="60"><p>Python</p></div>
+      <div class="col-md-2 mb-4"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="60"><p>Flask</p></div>
+      <div class="col-md-2 mb-4"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="60"><p>Pandas</p></div>
+      <div class="col-md-2 mb-4"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="60"><p>JavaScript</p></div>
+      <div class="col-md-2 mb-4"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="60"><p>HTML5</p></div>
+      <div class="col-md-2 mb-4"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="60"><p>CSS3</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ✨ Animations -->
+<style>
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+.hero-section {
+  min-height: 100vh;
+  width: 100%;
+}
+.floating-icons i {
+  position: absolute;
+  color: rgba(255,255,255,0.25);
+  font-size: 50px;
+  animation: floatIcon 8s infinite ease-in-out;
+}
+.floating-icons i:nth-child(1){ top:10%; left:15%; animation-delay:0s; }
+.floating-icons i:nth-child(2){ top:25%; right:20%; animation-delay:2s; }
+.floating-icons i:nth-child(3){ bottom:20%; left:25%; animation-delay:1s; }
+.floating-icons i:nth-child(4){ bottom:15%; right:15%; animation-delay:3s; }
+.floating-icons i:nth-child(5){ top:50%; left:45%; animation-delay:4s; }
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); opacity:0.4; }
+  50% { transform: translateY(-20px); opacity:0.8; }
+}
+.scroll-indicator {
+  position:absolute; bottom:20px; left:50%; transform:translateX(-50%);
+  animation: bounce 2s infinite;
+}
+@keyframes bounce {
+  0%, 100% { transform:translateY(0); }
+  50% { transform:translateY(10px); }
+}
+.hover-glow:hover {
+  box-shadow: 0 0 25px rgba(0, 123, 255, 0.6);
+  transform: scale(1.05);
+  transition: 0.3s ease;
+}
+.fade-up { animation: fadeInUp 1.2s ease; }
+.fade-in { animation: fadeIn 1.5s ease; }
+@keyframes fadeInUp { from {opacity:0; transform:translateY(25px);} to {opacity:1; transform:translateY(0);} }
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+</style>
+
+<script src="https://kit.fontawesome.com/a2d9d6a89b.js" crossorigin="anonymous"></script>
+
+{% endblock %}

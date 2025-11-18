@@ -1,0 +1,156 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<section class="analytics-hero">
+  <div class="container text-center animate__animated animate__fadeIn">
+    
+    <h1 class="title-glow mb-3">📊 Deep Market Analytics</h1>
+    <p class="subtitle-glow mb-5">AI-powered interactive job insights</p>
+
+    <!-- Filter Panel -->
+    <div class="filter-panel glass-box p-4 rounded-4 shadow-lg mb-5">
+  <div class="row g-3 justify-content-center">
+
+    <div class="col-md-3 position-relative">
+      <input id="yearInput" type="text"
+             class="form-control glow-input text-center"
+             placeholder="Enter Year (e.g. 2023)">
+      <div id="yearSuggest" class="suggest-box"></div>
+    </div>
+
+    <div class="col-md-3 position-relative">
+      <input id="sectorInput" type="text"
+             class="form-control glow-input text-center"
+             placeholder="Enter Sector (e.g. Data Science)">
+      <div id="sectorSuggest" class="suggest-box"></div>
+    </div>
+
+    <div class="col-md-3 position-relative">
+      <input id="stateInput" type="text"
+             class="form-control glow-input text-center"
+             placeholder="Enter Location (e.g. Mumbai)">
+      <div id="locationSuggest" class="suggest-box"></div>
+    </div>
+
+    <div class="col-md-2">
+      <button id="applyBtn" class="btn btn-glow w-100">🚀 Apply</button>
+    </div>
+
+  </div>
+</div>
+
+    <!-- Summary Box -->
+    <div id="summaryCard" class="glass-box p-4 rounded-4 shadow-lg text-start mb-4" style="display:none;">
+      <h5 class="text-info fw-bold mb-2">🧠 AI Summary</h5>
+      <p id="summaryText"></p>
+    </div>
+
+    <!-- Charts -->
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="chart-box glass-box p-3 rounded-4">
+          <h6 class="text-info fw-bold">💼 Average Salary by Sector</h6>
+          <div id="chart_sector" style="height:350px;"></div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="chart-box glass-box p-3 rounded-4">
+          <h6 class="text-info fw-bold">🧠 Top Skills Demand</h6>
+          <div id="chart_skills" style="height:350px;"></div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="chart-box glass-box p-3 rounded-4">
+          <h6 class="text-info fw-bold">🏢 Salary vs Company Rating</h6>
+          <div id="chart_rating" style="height:350px;"></div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="chart-box glass-box p-3 rounded-4">
+          <h6 class="text-info fw-bold">📈 Salary Trend by Year</h6>
+          <div id="chart_year" style="height:350px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.analytics-hero {
+  padding: 70px 0;
+  background: linear-gradient(130deg, #001f39, #000814);
+  min-height: 100vh;
+}
+
+.title-glow {
+  font-size: 42px;
+  color: #00eaff;
+  text-shadow: 0 0 18px #00eaff;
+}
+
+.subtitle-glow {
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+.glass-box {
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.glow-input {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  border-radius: 30px;
+  padding: 10px;
+}
+
+.glow-input:focus {
+  box-shadow: 0 0 15px #00eaff;
+}
+
+.btn-glow {
+  background: linear-gradient(90deg, #00eaff, #0077ff);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0,150,255,0.5);
+}
+
+.chart-box {
+  transition: 0.2s;
+}
+
+.chart-box:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0,150,255,0.3);
+}
+.auto-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.auto-box::-webkit-scrollbar-thumb {
+  background: #0ff;
+  border-radius: 10px;
+}
+
+.auto-box div:hover {
+  background: #0c2f57 !important;
+}
+
+
+</style>
+
+<script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
+
+
+{% endblock %}

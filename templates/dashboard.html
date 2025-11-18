@@ -1,0 +1,219 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="dashboard-container container-fluid py-4">
+
+  <!-- 🌟 KPI Section -->
+  <div class="row g-4 mb-4">
+
+    <div class="col-md-3">
+  <div class="kpi-card kpi-blue fade-in">
+    <h6>Total Job Records</h6>
+    <h2 id="k_total">-</h2>
+  </div>
+</div>
+
+<div class="col-md-3">
+  <div class="kpi-card kpi-green fade-in">
+    <h6>Average Salary</h6>
+    <h2 id="k_avg">-</h2>
+  </div>
+</div>
+
+<div class="col-md-3">
+  <div class="kpi-card kpi-cyan fade-in">
+    <h6>Top Sector</h6>
+    <h4 id="k_sector">-</h4>
+  </div>
+</div>
+
+<div class="col-md-3">
+  <div class="kpi-card kpi-yellow fade-in">
+    <h6>Top Location</h6>
+    <h4 id="k_location">-</h4>
+  </div>
+</div>
+
+  </div>
+
+  <!-- 📊 Graph Section -->
+  <div class="row g-4">
+
+    <div class="col-lg-8">
+      <div class="panel p-4 fade-in">
+
+        <h5 class="accent mb-2">📈 Salary Trend by Year</h5>
+        <div id="chart_salary_trend" class="chart-box"></div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="panel p-4 fade-in">
+        <h5 class="accent mb-2">🏙 Top States by Avg Salary</h5>
+        <div id="chart_top_states" class="chart-box"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row g-4 mt-3">
+
+    <div class="col-lg-6">
+      <div class="panel p-4 fade-in">
+        <h5 class="accent mb-2">💼 Top Hiring Companies</h5>
+        <div id="chart_companies" class="chart-box"></div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="panel p-4 fade-in">
+        <h5 class="accent mb-2">🧠 Skill Demand Radar</h5>
+        <div id="chart_skill_radar" class="chart-box"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Dashboard Script -->
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+<style>
+/* 🌌 Background */
+.dashboard-container {
+  background: linear-gradient(180deg, #0b1220, #061527);
+  min-height: 100vh;
+}
+
+/* ✨ Neon KPI Cards */
+.neon-card {
+  border-radius: 16px;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: 0.3s ease;
+}
+.neon-card:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+}
+
+/* 🧊 Glass Effect Panels */
+.glass-card {
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(6px);
+  transition: 0.3s;
+}
+.glass-card:hover {
+  box-shadow: 0 0 20px rgba(0,255,255,0.2);
+}
+
+/* Accent Title */
+.accent {
+  color: #00eaff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Chart container */
+.chart-box {
+  height: 380px;
+}
+
+/* Plotly text fix */
+.js-plotly-plot .main-svg {
+  font-family: 'Inter', sans-serif;
+}
+
+
+/* ---------- GLOBAL MODERN THEME ---------- */
+
+body {
+    background: radial-gradient(circle at top, #0b1220, #060a14);
+    color: #dff3ff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* ---------- GLASS PANEL ---------- */
+
+.panel {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.08);
+    transition: 0.3s ease;
+}
+
+.panel:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.18);
+}
+
+/* ---------- KPI CARDS ---------- */
+
+.kpi-card {
+    padding: 20px;
+    border-radius: 14px;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.22);
+}
+
+.kpi-blue { background: linear-gradient(135deg, #007bff, #00bfff); }
+.kpi-green { background: linear-gradient(135deg, #17c964, #1ddf88); }
+.kpi-cyan { background: linear-gradient(135deg, #00d4ff, #24e0d6); }
+.kpi-yellow { background: linear-gradient(135deg, #ffca2b, #ffbf00); }
+
+.kpi-card h2, .kpi-card h4, .kpi-card h6 {
+    margin: 0;
+}
+
+/* ---------- SECTION TITLES ---------- */
+
+.accent {
+    color: #4da8ff;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-shadow: 0 0 8px rgba(77, 168, 255, 0.8);
+}
+
+/* ---------- CHART SPACING ---------- */
+
+#chart_salary_trend,
+#chart_top_states,
+#chart_companies,
+#chart_skill_radar {
+    transition: 0.4s ease;
+}
+
+/* ---------- SMOOTH ENTRY ANIMATION ---------- */
+
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+</style>
+
+
+{% endblock %}

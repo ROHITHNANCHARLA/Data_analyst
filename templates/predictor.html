@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<section class="predictor-section text-light text-center"
+  style="min-height:100vh; background: linear-gradient(135deg, #001510, #001f2f); padding:60px 0;">
+
+  <div class="container animate__animated animate__fadeInDown">
+    <h1 class="fw-bold mb-3 text-glow">💰 AI-Powered Salary Predictor</h1>
+    <p class="lead mb-4 opacity-75">Estimate salary ranges instantly — interactive gauge, confidence meter & role suggestions.</p>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card panel p-4 mb-4">
+          <form id="predictForm" autocomplete="off">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <input type="text" id="jobTitle" class="form-control rounded-pill text-center" placeholder="Enter Job Title (e.g. Senior Data Scientist)" required>
+              </div>
+              <div class="col-md-6">
+                <input list="sectors" id="sector" class="form-control rounded-pill text-center" placeholder="Sector (type and choose)" required>
+                <datalist id="sectors"></datalist>
+              </div>
+
+              <div class="col-md-6">
+                <input type="number" id="rating" min="0" max="5" step="0.1" class="form-control rounded-pill text-center" placeholder="Company Rating (0–5)">
+              </div>
+              <div class="col-md-6">
+                <input id="skills" list="skills_list" class="form-control rounded-pill text-center" placeholder="Skills (comma separated)">
+                <datalist id="skills_list"></datalist>
+              </div>
+
+              <div class="col-md-8">
+                <input id="location" list="locations" class="form-control rounded-pill text-center" placeholder="Location (e.g. Bangalore)">
+                <datalist id="locations"></datalist>
+              </div>
+
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-glow btn-lg w-100 rounded-pill">🚀 Predict Salary</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- results -->
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="card panel p-3 mb-4" id="resultCard" style="display:none;">
+          <h5 class="mb-2">🔍 Prediction</h5>
+
+          <div id="gauge" style="height:260px;"></div>
+
+          <div class="mt-3">
+            <div class="d-flex justify-content-between">
+              <small>Confidence</small>
+              <small id="confPercent">--%</small>
+            </div>
+            <div class="progress" style="height:12px;">
+              <div id="confBar" class="progress-bar" role="progressbar" style="width:0%"></div>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <p class="mb-1"><strong>Estimated Range:</strong></p>
+            <p id="rangeText" class="h5 mb-0"></p>
+          </div>
+
+          <div class="mt-3">
+            <p class="mb-1"><strong>AI Recommended Roles:</strong></p>
+            <div id="recoList" class="d-flex flex-wrap gap-2"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Plotly -->
+<script src="https://cdn.plot.ly/plotly-2.20.0.min.js"></script>
+<script src="{{ url_for('static', filename='js/predictor.js') }}"></script>
+
+<style>
+.btn-glow {
+  background: linear-gradient(90deg,#00e8a0,#00b4ff);
+  border: none; color: #03141a; font-weight:700;
+  box-shadow: 0 6px 24px rgba(0,180,255,0.12);
+}
+.panel { background: rgba(255,255,255,0.03); border-radius:12px; }
+.text-glow { text-shadow: 0 0 12px #00eaff; color: #c8fff0; }
+.progress-bar { transition: width 900ms ease; }
+#recoList .pill { background: rgba(255,255,255,0.06); padding:6px 10px; border-radius:999px; color:#e8fff7; }
+</style>
+
+{% endblock %}

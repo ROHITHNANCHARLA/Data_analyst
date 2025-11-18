@@ -1,0 +1,72 @@
+Year: 2021
+Sector: Business Intelligence
+Location: California
+
+🔍 Predictor Input Headings Explained
+1. Job Title
+
+👉 Example: Data Analyst, Data Scientist, Business Analyst, Machine Learning Engineer
+💬 Meaning:
+The role or position for which the salary is being predicted.
+Different roles have different pay scales — e.g., Data Scientist > Data Analyst > Intern.
+
+📊 Why it matters:
+It’s the strongest indicator of salary because it defines the job level and skill depth.
+
+2. Sector / Industry
+
+👉 Example: Business Intelligence, IT, Research, Finance, Health, Retail
+💬 Meaning:
+The industry or business area the job belongs to.
+For instance, a Data Analyst in Finance earns differently from one in Education.
+
+📊 Why it matters:
+Each sector has its own average pay depending on market demand and company budgets.
+
+3. Company Rating
+
+👉 Example: 4.2, 3.9, 4.7
+💬 Meaning:
+This is usually the Glassdoor rating of the company (from 0–5), based on employee satisfaction and reputation.
+
+📊 Why it matters:
+Companies with higher ratings often offer better salaries and work benefits.
+It reflects company prestige — a factor influencing pay.
+
+4. Skills
+
+👉 Example: Python, SQL, Tableau, Power BI, Machine Learning
+💬 Meaning:
+Key skills listed in job descriptions.
+The richer and more in-demand your skills, the higher your expected salary.
+
+📊 Why it matters:
+A job requiring Python + SQL + ML typically pays more than one needing just Excel.
+
+5. Location
+
+👉 Example: Bangalore, New York, Pune, California, London
+💬 Meaning:
+The city or state where the job is located.
+Cost of living and demand vary greatly by geography.
+
+📊 Why it matters:
+Data Analysts in metro cities or tech hubs earn higher than those in smaller regions.
+E.g., Bangalore > Jaipur or San Francisco > Austin.
+
+🧠 Summary Table
+Input Field	Description	Example	Impact on Salary
+Job Title	Job role (defines level)	Data Scientist	🔥 High
+Sector	Industry / business type	Business Intelligence	🔥 High
+Company Rating	Quality of company (0–5)	4.5	⚡ Medium
+Skills	Technical skills required	Python, SQL, ML	🔥 High
+Location	City / region	Pune, MH	⚡ Medium
+⚙️ Behind the Scenes — Model Logic
+
+In the backend, the model uses “Sector” and “Rating” as primary training features because:
+
+“Sector” (industry) → categorical impact on salary.
+
+“Rating” → numerical impact (higher rating = higher pay).
+
+You can later enhance this by including Job_Title and Location in the ML model if you want it to be more accurate — I can show you how to do that next.
